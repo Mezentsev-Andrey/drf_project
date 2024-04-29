@@ -9,6 +9,5 @@ router.register('users', UsersAPIViewSet)
 
 urlpatterns = [
     path("payments/list/", PaymentlListView.as_view(), name="payment_list"),
-]
+] + router.urls
 
-urlpatterns += router.urls
