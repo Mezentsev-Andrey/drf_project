@@ -27,7 +27,7 @@ class Payment(models.Model):
     """Модель платежа"""
     class PaymentType(models.TextChoices):
         CASH = 'cash', 'наличные'
-        SPENDING = 'spending', 'перевод на счет'
+        SPENDING = 'spend', 'перевод на счет'
 
     user = models.ForeignKey(User, on_delete=models.SET_NULL, related_name='user', verbose_name='Пользователь', **NULLABLE)
     date = models.DateField(auto_now=True, verbose_name='Дата оплаты')
