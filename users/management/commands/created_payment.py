@@ -27,7 +27,7 @@ class Command(BaseCommand):
             course=course1,
             amount=170,
             payment_type="cash",
-                    )
+        )
 
         payment2 = Payment.objects.create(
             user=user2,
@@ -35,7 +35,6 @@ class Command(BaseCommand):
             course=course2,
             amount=356,
             payment_type="spend",
-
         )
 
         payment3 = Payment.objects.create(
@@ -45,7 +44,6 @@ class Command(BaseCommand):
             lesson=lesson1,
             amount=789,
             payment_type="cash",
-
         )
 
         payment4 = Payment.objects.create(
@@ -55,7 +53,10 @@ class Command(BaseCommand):
             lesson=lesson2,
             amount=834,
             payment_type="spend",
-
         )
 
-        self.stdout.write(self.style.SUCCESS("Процесс тестирования завершен. Платежные данные загружены."))
+        self.stdout.write(
+            self.style.SUCCESS(
+                "Процесс тестирования завершен. Платежные данные загружены."
+            )
+        )
