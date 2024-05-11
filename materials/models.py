@@ -17,7 +17,7 @@ class Course(models.Model):
         settings.AUTH_USER_MODEL,
         on_delete=models.SET_NULL,
         **NULLABLE,
-        verbose_name="Владелец"
+        verbose_name="Владелец",
     )
 
     def __str__(self):
@@ -36,18 +36,19 @@ class Lesson(models.Model):
         verbose_name="Курс",
         related_name="lesson",
         on_delete=models.SET_NULL,
-        **NULLABLE
+        **NULLABLE,
     )
     name = models.CharField(max_length=255, verbose_name="Название")
     description = models.TextField(verbose_name="Описание")
     preview = models.ImageField(
         upload_to="lesson_preview", verbose_name="Изображение", **NULLABLE
     )
+    video = models.CharField(max_length=300, verbose_name="Ссылка на видео", **NULLABLE)
     owner = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.SET_NULL,
         **NULLABLE,
-        verbose_name="Владелец"
+        verbose_name="Владелец",
     )
 
     def __str__(self):
@@ -56,3 +57,22 @@ class Lesson(models.Model):
     class Meta:
         verbose_name = "Урок"
         verbose_name_plural = "Уроки"
+
+
+class CourseSubscription(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        verbose_name="Подписчик",
+        **NULLABLE,
+    )
+
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, verbose_name="Курс")
+    is_active = models.BooleanField(default=False, verbose_name="Активна")
+
+    class Meta:
+        verbose_name = "Подписка на курс"
+        verbose_name_plural = "Подписки на курс"
+
+    def __str__(self):
+        return f"{self.user} {self.course}"
