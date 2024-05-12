@@ -7,7 +7,6 @@ from users.models import Payment, User
 
 
 class Command(BaseCommand):
-    help = ""
 
     def handle(self, *args, **kwargs):
         Payment.objects.all().delete()
@@ -21,7 +20,7 @@ class Command(BaseCommand):
         lesson1, created = Lesson.objects.get_or_create(name="Урок 1")
         lesson2, created = Lesson.objects.get_or_create(name="Урок 2")
 
-        payment1 = Payment.objects.create(
+        Payment.objects.create(
             user=user1,
             date=datetime.datetime.now().date,
             course=course1,
@@ -29,7 +28,7 @@ class Command(BaseCommand):
             payment_type="cash",
         )
 
-        payment2 = Payment.objects.create(
+        Payment.objects.create(
             user=user2,
             date=datetime.datetime.now().date,
             course=course2,
@@ -37,7 +36,7 @@ class Command(BaseCommand):
             payment_type="spend",
         )
 
-        payment3 = Payment.objects.create(
+        Payment.objects.create(
             user=user1,
             date=datetime.datetime.now().date,
             course=course2,
@@ -46,7 +45,7 @@ class Command(BaseCommand):
             payment_type="cash",
         )
 
-        payment4 = Payment.objects.create(
+        Payment.objects.create(
             user=user2,
             date=datetime.datetime.now().date,
             course=course1,

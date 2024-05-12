@@ -12,11 +12,6 @@ class UserCreateAPIView(CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
-    def perform_create(self, serializer):
-        user.serializer.save(is_active=True)
-        user.set_password(user.password)
-        user.save()
-
 
 class UsersAPIViewSet(ModelViewSet):
     queryset = User.objects.all()
@@ -30,7 +25,8 @@ class PaymentCreateAPIView(generics.CreateAPIView):
 class PaymentlListView(ListAPIView):
     queryset = Payment.objects.all()
     serializer_class = PaymentSerializer
-    filter_backends = [SearchFilter, django_filters.rest_framework.DjangoFilterBackend]
+    filter_backends = [SearchFilter,
+                       django_filters.rest_framework.DjangoFilterBackend]
 
     filterset_fields = ["course", "lesson", "payment_type"]
     ordering_fields = ["date"]

@@ -1,4 +1,3 @@
-from rest_framework import generics
 from rest_framework.generics import (CreateAPIView, DestroyAPIView,
                                      ListAPIView, RetrieveAPIView,
                                      UpdateAPIView, get_object_or_404)
@@ -90,4 +89,4 @@ class SubscribtionCourseAPIView(APIView):
             subs_item.delete()
             message = "подписка удалена"
 
-        return Response({"message": message})
+        return Response(message)

@@ -11,7 +11,8 @@ app_name = UsersConfig.name
 
 urlpatterns = [
     path("payment/", PaymentlListView.as_view(), name="payment_list"),
-    path("payment/create", PaymentCreateAPIView.as_view(), name="payment_create"),
+    path(
+        "payment/create", PaymentCreateAPIView.as_view(), name="payment_create"),
     path("register/", UserCreateAPIView.as_view(), name="register"),
     path(
         "login/",
