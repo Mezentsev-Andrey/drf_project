@@ -1,6 +1,8 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+from config import settings
+from config.settings import PAYMENT_METHOD_CHOICES
 from materials.models import Course, Lesson
 
 NULLABLE = {"blank": True, "null": True}
@@ -28,32 +30,52 @@ class User(AbstractUser):
 class Payment(models.Model):
     """Модель платежа"""
 
-    class PaymentType(models.TextChoices):
-        CASH = "cash", "наличные"
-        SPENDING = "spend", "перевод на счет"
-
-    user = models.ForeignKey(
-        User,
-        on_delete=models.SET_NULL,
+    owner = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
         related_name="user",
-        verbose_name="Пользователь",
+        verbose_name="Владелец",
         **NULLABLE
     )
-    date = models.DateField(auto_now=True, verbose_name="Дата оплаты")
-    course = models.ForeignKey(
-        Course, on_delete=models.CASCADE, verbose_name="Оплаченный курс"
+    payment_date = models.DateField(auto_now=True,
+                                    verbose_name="Дата оплаты",
+                                    **NULLABLE
+                                    )
+    paid_course = models.ForeignKey(
+        Course, on_delete=models.CASCADE,
+        verbose_name="Оплаченный курс",
+        **NULLABLE
     )
-    lesson = models.ForeignKey(
-        Lesson, on_delete=models.CASCADE, verbose_name="Оплаченный урок", **NULLABLE
+    paid_lesson = models.ForeignKey(
+        Lesson, on_delete=models.CASCADE,
+        verbose_name="Оплаченный урок",
+        **NULLABLE
     )
-    amount = models.DecimalField(
-        max_digits=8, decimal_places=2, verbose_name="Сумма оплаты"
+    payment_amount = models.PositiveIntegerField(
+        verbose_name="Сумма оплаты",
+        **NULLABLE
     )
     payment_type = models.CharField(
-        max_length=32, choices=PaymentType.choices, verbose_name="Способ оплаты"
+        max_length=50,
+        choices=PAYMENT_METHOD_CHOICES,
+        verbose_name="Способ оплаты",
+        **NULLABLE,
     )
+    session_id = models.CharField(
+        max_length=255,
+        verbose_name="id сессии",
+        **NULLABLE,
+    )
+    link = models.URLField(
+        max_length=400,
+        verbose_name="Cсылка на оплату",
+        **NULLABLE,
+    )
+
+    def __str__(self) -> str:
+        return f"{self.owner}, {self.paid_course}"
 
     class Meta:
         verbose_name = "Платеж"
         verbose_name_plural = "Платежи"
-        ordering = ("user", "date")
+
