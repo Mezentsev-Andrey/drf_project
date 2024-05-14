@@ -47,5 +47,3 @@ class PaymentlListView(ListAPIView):
         "payment_date",
         "payment_amount",
     ]
-
-
