@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+
     "django_dump_load_utf8",
     "rest_framework",
     "rest_framework_simplejwt",
@@ -144,8 +145,10 @@ AUTH_USER_MODEL = "users.User"
 CASH_PAID = "cash"
 CARD_PAID = "card"
 
-PAYMENT_METHOD_CHOICES = [(CASH_PAID, "Наличные"), (CARD_PAID, "Перевод"),]
-
+PAYMENT_METHOD_CHOICES = [
+    (CASH_PAID, "Наличные"),
+    (CARD_PAID, "Перевод"),
+]
 
 REST_FRAMEWORK = {
     "DEFAULT_FILTER_BACKENDS": [

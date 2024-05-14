@@ -6,7 +6,8 @@ from rest_framework.viewsets import ModelViewSet
 
 from users.models import Payment, User
 from users.serializers import PaymentSerializer, UserSerializer
-from users.services import create_stripe_price, create_stripe_product, create_stripe_session, convert_rub_to_usd
+from users.services import (convert_rub_to_usd, create_stripe_price,
+                            create_stripe_product, create_stripe_session)
 
 
 class UserCreateAPIView(CreateAPIView):
@@ -24,7 +25,7 @@ class PaymentCreateAPIView(generics.CreateAPIView):
     serializer_class = PaymentSerializer
 
     def perform_create(self, serializer):
-        payment = serializer.save(owner=self.request.user)
+        payment = serializer.save(user=self.request.user)
         product_name = payment.paid_course.name
         stripe_product = create_stripe_product(product_name)
         amount_in_usd = convert_rub_to_usd(payment.paid_course.price)
@@ -39,7 +40,12 @@ class PaymentCreateAPIView(generics.CreateAPIView):
 class PaymentlListView(ListAPIView):
     queryset = Payment.objects.all()
     serializer_class = PaymentSerializer
+    filterset_fields = ["paid_course", "paid_lesson", "payment_type"]
     filter_backends = [SearchFilter, django_filters.rest_framework.DjangoFilterBackend]
 
-    filterset_fields = ["course", "lesson", "payment_type"]
-    ordering_fields = ["date"]
+    ordering_fields = [
+        "payment_date",
+        "payment_amount",
+    ]
+
+

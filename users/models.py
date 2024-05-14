@@ -30,30 +30,24 @@ class User(AbstractUser):
 class Payment(models.Model):
     """Модель платежа"""
 
-    owner = models.ForeignKey(
+    user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name="user",
-        verbose_name="Владелец",
-        **NULLABLE
+        verbose_name="Пользователь",
+        **NULLABLE,
     )
-    payment_date = models.DateField(auto_now=True,
-                                    verbose_name="Дата оплаты",
-                                    **NULLABLE
-                                    )
+    payment_date = models.DateField(
+        auto_now=True, verbose_name="Дата оплаты", **NULLABLE
+    )
     paid_course = models.ForeignKey(
-        Course, on_delete=models.CASCADE,
-        verbose_name="Оплаченный курс",
-        **NULLABLE
+        Course, on_delete=models.CASCADE, verbose_name="Оплаченный курс", **NULLABLE
     )
     paid_lesson = models.ForeignKey(
-        Lesson, on_delete=models.CASCADE,
-        verbose_name="Оплаченный урок",
-        **NULLABLE
+        Lesson, on_delete=models.CASCADE, verbose_name="Оплаченный урок", **NULLABLE
     )
     payment_amount = models.PositiveIntegerField(
-        verbose_name="Сумма оплаты",
-        **NULLABLE
+        verbose_name="Сумма оплаты", **NULLABLE
     )
     payment_type = models.CharField(
         max_length=50,
@@ -73,9 +67,8 @@ class Payment(models.Model):
     )
 
     def __str__(self) -> str:
-        return f"{self.owner}, {self.paid_course}"
+        return f"{self.user}, {self.paid_course}"
 
     class Meta:
         verbose_name = "Платеж"
         verbose_name_plural = "Платежи"
-

@@ -1,1 +1,112 @@
-[{"model": "users.user", "pk": 1, "fields": {"password": "2797", "last_login": null, "is_superuser": false, "first_name": "", "last_name": "", "is_staff": false, "is_active": true, "date_joined": "2024-05-01T16:46:05Z", "email": "user1@test.ru", "avatar": "", "phone_number": null, "city": null, "groups": [1], "user_permissions": []}}, {"model": "users.user", "pk": 2, "fields": {"password": "7685", "last_login": null, "is_superuser": false, "first_name": "", "last_name": "", "is_staff": false, "is_active": true, "date_joined": "2024-05-01T16:46:05Z", "email": "user2@test.ru", "avatar": "", "phone_number": null, "city": null, "groups": [], "user_permissions": []}}, {"model": "users.user", "pk": 3, "fields": {"password": "pbkdf2_sha256$600000$ofe9p4Vu1onL0p27mHxcXT$//OtDCUph/SZCdBZaWH0GQx0oUYgWTf8NKwuCAULSuY=", "last_login": "2024-05-05T13:43:24.587Z", "is_superuser": true, "first_name": "Admin", "last_name": "SkyPro", "is_staff": true, "is_active": true, "date_joined": "2024-05-05T12:51:51.660Z", "email": "mezentsew@mail.ru", "avatar": "", "phone_number": null, "city": null, "groups": [], "user_permissions": []}}, {"model": "users.payment", "pk": 1, "fields": {"user": 1, "date": "2024-05-01", "course": 1, "lesson": null, "amount": "170.00", "payment_type": "cash"}}, {"model": "users.payment", "pk": 2, "fields": {"user": 2, "date": "2024-05-01", "course": 2, "lesson": null, "amount": "356.00", "payment_type": "spend"}}, {"model": "users.payment", "pk": 3, "fields": {"user": 1, "date": "2024-05-01", "course": 2, "lesson": 1, "amount": "789.00", "payment_type": "cash"}}, {"model": "users.payment", "pk": 4, "fields": {"user": 2, "date": "2024-05-01", "course": 1, "lesson": 2, "amount": "834.00", "payment_type": "spend"}}]
+[
+  {
+    "model": "users.user",
+    "pk": 1,
+    "fields": {
+      "password": "2797",
+      "last_login": null,
+      "is_superuser": false,
+      "first_name": "",
+      "last_name": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-05-01T16:46:05Z",
+      "email": "user1@test.ru",
+      "avatar": "",
+      "phone_number": null,
+      "city": null,
+      "groups": [
+        1
+      ],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 2,
+    "fields": {
+      "password": "7685",
+      "last_login": null,
+      "is_superuser": false,
+      "first_name": "",
+      "last_name": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-05-01T16:46:05Z",
+      "email": "user2@test.ru",
+      "avatar": "",
+      "phone_number": null,
+      "city": null,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 3,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$ofe9p4Vu1onL0p27mHxcXT$//OtDCUph/SZCdBZaWH0GQx0oUYgWTf8NKwuCAULSuY=",
+      "last_login": "2024-05-05T13:43:24.587Z",
+      "is_superuser": true,
+      "first_name": "Admin",
+      "last_name": "SkyPro",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2024-05-05T12:51:51.660Z",
+      "email": "mezentsew@mail.ru",
+      "avatar": "",
+      "phone_number": null,
+      "city": null,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.payment",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "date": "2024-05-01",
+      "course": 1,
+      "lesson": null,
+      "amount": "170.00",
+      "payment_type": "cash"
+    }
+  },
+  {
+    "model": "users.payment",
+    "pk": 2,
+    "fields": {
+      "user": 2,
+      "date": "2024-05-01",
+      "course": 2,
+      "lesson": null,
+      "amount": "356.00",
+      "payment_type": "spend"
+    }
+  },
+  {
+    "model": "users.payment",
+    "pk": 3,
+    "fields": {
+      "user": 1,
+      "date": "2024-05-01",
+      "course": 2,
+      "lesson": 1,
+      "amount": "789.00",
+      "payment_type": "cash"
+    }
+  },
+  {
+    "model": "users.payment",
+    "pk": 4,
+    "fields": {
+      "user": 2,
+      "date": "2024-05-01",
+      "course": 1,
+      "lesson": 2,
+      "amount": "834.00",
+      "payment_type": "spend"
+    }
+  }
+]

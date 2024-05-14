@@ -19,9 +19,10 @@ class Course(models.Model):
         **NULLABLE,
         verbose_name="Владелец",
     )
+    price = models.PositiveIntegerField(default="10000", verbose_name="Цена курса")
 
     def __str__(self):
-        return self.name
+        return f"{self.name}"
 
     class Meta:
         verbose_name = "Курс"
@@ -52,7 +53,7 @@ class Lesson(models.Model):
     )
 
     def __str__(self):
-        return self.name
+        return f"{self.name}"
 
     class Meta:
         verbose_name = "Урок"
@@ -60,6 +61,8 @@ class Lesson(models.Model):
 
 
 class CourseSubscription(models.Model):
+    """Модель подписки на курс"""
+
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
