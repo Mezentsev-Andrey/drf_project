@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from materials.models import Course, CourseSubscription, Lesson
+from materials.models import Course, Subscription, Lesson
 
 
 @admin.register(Course)
@@ -15,7 +15,7 @@ class LessonAdmin(admin.ModelAdmin):
     search_fields = ("name", "course")
 
 
-@admin.register(CourseSubscription)
-class CourseSubscriptionAdmin(admin.ModelAdmin):
-    list_display = ("user", "course")
-    search_fields = ("user",)
+@admin.register(Subscription)
+class SubscriptionAdmin(admin.ModelAdmin):
+    list_display = ("subscriber", "course")
+    search_fields = ("subscriber",)

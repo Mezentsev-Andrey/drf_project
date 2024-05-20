@@ -1,7 +1,14 @@
 from rest_framework import serializers
 
-from materials.models import Course, CourseSubscription, Lesson
+from materials.models import Course, Subscription, Lesson
 from materials.validators import ValidateURLResource
+from rest_framework.fields import SerializerMethodField
+
+
+class SubscriptionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Subscription
+        fields = "__all__"
 
 
 class LessonSerializer(serializers.ModelSerializer):
@@ -10,41 +17,23 @@ class LessonSerializer(serializers.ModelSerializer):
         fields = "__all__"
         validators = [ValidateURLResource(field="video")]
 
-    def create(self, validated_data):
-        user = self.context["request"].user
-        lesson = Lesson(**validated_data)
-        lesson.owner = user
-        lesson.save()
-        return lesson
-
 
 class CourseSerializer(serializers.ModelSerializer):
-    lessons_count = serializers.SerializerMethodField()
-    lesson = LessonSerializer(many=True, read_only=True)
-    course_subscribe = serializers.SerializerMethodField()
+    lesson = LessonSerializer(source="lesson_set", many=True, read_only=True)
+    lessons_in_course_count = SerializerMethodField()
+    is_subscribed = SerializerMethodField()
+    subscribers = SubscriptionSerializer(source='course_for_subscription', many=True, read_only=True)
 
-    def get_course_subscribe(self, instance):
-        user = self.context["request"].user
-        if CourseSubscription.objects.filter(user=user, course=instance).exists():
-            return True
-        return False
+    def get_lessons_in_course_count(self, obj):
+        return obj.lesson_set.all().count()
 
-    def get_lessons_count(self, instance):
-        return instance.lesson.count()
+    def get_is_subscribed(self, obj):
+        request = self.context.get("request")
+        user = None
+        if request:
+            user = request.user
+        return obj.course_for_subscription.filter(subscriber=user).exists()
 
     class Meta:
         model = Course
-        fields = "__all__"
-
-    def create(self, validated_data):
-        user = self.context["request"].user
-        course = Course(**validated_data)
-        course.owner = user
-        course.save()
-        return course
-
-
-class CourseSubscriptionSerializer(serializers.ModelSerializer):
-    class Meta:
-        models = CourseSubscription
         fields = "__all__"
