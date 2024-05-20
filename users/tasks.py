@@ -1,13 +1,15 @@
-from celery import shared_task
 from datetime import datetime, timedelta
-from users.models import User
+
 import pytz
+from celery import shared_task
 from django.conf import settings
+
+from users.models import User
 
 
 @shared_task
 def block_inactive_user():
-    """ Блокировка пользователя если он не заходил более 30 календарных дней на платформу """
+    """Блокировка пользователя если он не заходил более 30 календарных дней на платформу"""
     zone = pytz.timezone(settings.TIME_ZONE)
     now = datetime.now(zone)
     expiration_date = now - timedelta(days=30)

@@ -69,12 +69,16 @@ class Subscription(models.Model):
         **NULLABLE,
     )
 
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, verbose_name="Курс")
-    is_active = models.BooleanField(default=False, verbose_name="Активна")
+    course = models.ForeignKey(
+        Course,
+        on_delete=models.CASCADE,
+        verbose_name="Курс",
+        related_name="course_for_subscription",
+    )
 
     class Meta:
         verbose_name = "Подписка на курс"
         verbose_name_plural = "Подписки на курс"
 
     def __str__(self):
-        return f"{self.course} {self.subscriber}"
+        return f"{self.subscriber} {self.course}"

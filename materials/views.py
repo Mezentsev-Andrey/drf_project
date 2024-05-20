@@ -5,10 +5,11 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
-from materials.models import Course, Subscription, Lesson
-from materials.tasks import send_updates
+from materials.models import Course, Lesson, Subscription
 from materials.paginations import CustomPagination
-from materials.serializers import CourseSerializer, LessonSerializer, SubscriptionSerializer
+from materials.serializers import (CourseSerializer, LessonSerializer,
+                                   SubscriptionSerializer)
+from materials.tasks import send_updates
 from users.permissions import IsModerator, IsOwner
 
 
@@ -33,7 +34,7 @@ class CourseViewSet(ModelViewSet):
         return super().get_permissions()
 
     def partial_update(self, request, *args, **kwargs):
-        course_item = get_object_or_404(self.queryset, pk=kwargs.get('pk'))
+        course_item = get_object_or_404(self.queryset, pk=kwargs.get("pk"))
         serializer = self.serializer_class(course_item, data=request.data, partial=True)
         serializer.is_valid(raise_exception=True)
         serializer.save()

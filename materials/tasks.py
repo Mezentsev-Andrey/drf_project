@@ -13,8 +13,10 @@ def send_updates(item: typing.Any) -> typing.Any:
     active_subscriptions = Subscription.objects.filter(course=item)
     if active_subscriptions:
         for item in active_subscriptions:
-            send_mail(subject=f'Обновление курса {item.course.name}',
-                      message=f'Информируем, что курс {item.course.name} обновлен',
-                      from_email=settings.EMAIL_HOST_USER,
-                      recipient_list=[item.user.email],
-                      fail_silently=False)
+            send_mail(
+                subject=f"Обновление курса {item.course.name}",
+                message=f"Информируем, что курс {item.course.name} обновлен",
+                from_email=settings.EMAIL_HOST_USER,
+                recipient_list=[item.user.email],
+                fail_silently=False,
+            )

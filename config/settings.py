@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
     "django_dump_load_utf8",
     "rest_framework",
     "rest_framework_simplejwt",
@@ -52,7 +51,7 @@ INSTALLED_APPS = [
     "django_filters",
     "drf_yasg",
     "drf_spectacular",
-    'django_celery_beat'
+    "django_celery_beat",
 ]
 
 MIDDLEWARE = [
@@ -185,13 +184,13 @@ CELERY_TIMEZONE = TIME_ZONE
 CELERY_TASK_TRACK_STARTED = True
 CELERY_TASK_TIME_LIMIT = 30 * 60
 
-CELERY_BROKER_URL = os.getenv('CELERY_BROKER_URL ')
-CELERY_RESULT_BACKEND = os.getenv('CELERY_RESULT_BACKEND')
+CELERY_BROKER_URL = os.getenv("CELERY_BROKER_URL ")
+CELERY_RESULT_BACKEND = os.getenv("CELERY_RESULT_BACKEND")
 
-EMAIL_HOST = os.getenv('EMAIL_HOST')
-EMAIL_PORT = os.getenv('EMAIL_PORT')
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+EMAIL_HOST = os.getenv("EMAIL_HOST")
+EMAIL_PORT = os.getenv("EMAIL_PORT")
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 EMAIL_USE_SSL = True
 EMAIL_USE_TSL = False
 
@@ -200,8 +199,10 @@ SERVER_EMAIL = EMAIL_HOST_USER
 EMAIL_ADMIN = EMAIL_HOST_USER
 
 CELERY_BEAT_SCHEDULE = {
-    'task-name': {
-        'task': 'myapp.tasks.my_task',  # Путь к задаче
-        'schedule': timedelta(minutes=1),  # Расписание выполнения задачи (например, каждые 10 минут)
+    "task-name": {
+        "task": "myapp.tasks.my_task",  # Путь к задаче
+        "schedule": timedelta(
+            minutes=1
+        ),  # Расписание выполнения задачи (например, каждые 10 минут)
     },
 }
