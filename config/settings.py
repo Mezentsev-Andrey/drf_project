@@ -200,7 +200,7 @@ EMAIL_ADMIN = EMAIL_HOST_USER
 
 CELERY_BEAT_SCHEDULE = {
     "task-name": {
-        "task": "myapp.tasks.my_task",  # Путь к задаче
+        "task": "users.tasks.block_inactive_user",  # Путь к задаче
         "schedule": timedelta(
             minutes=1
         ),  # Расписание выполнения задачи (например, каждые 10 минут)
