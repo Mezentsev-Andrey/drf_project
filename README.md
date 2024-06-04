@@ -1,8 +1,9 @@
 Платформа для онлайн-обучения
 
+Проект онлайн-школы
 27.2. Docker Compose
 Команды в терминале:
-docker-compose build (собрать образ)
+sudo docker-compose build (собрать образ)
 docker-compose up (запуск контейнера)
 docker-compose exec app <команда> (выполнение команды внутри контейнера)
 Примечание
