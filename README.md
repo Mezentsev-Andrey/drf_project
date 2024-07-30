@@ -1,7 +1,7 @@
 # Платформа для онлайн-обучения
 
 ## Запуск приложения
-Заполнение базы данных произведено в админке. Создать суперпользователя кастомной командой 'python manage.py csu'. Заполнить базу данных командой `python manage.py loaddatautf8 all_data.json`. 
+Заполнение базы данных произведено в админке. Создать суперпользователя кастомной командой `python manage.py csu`. Заполнить базу данных командой `python manage.py loaddatautf8 all_data.json`. 
 
 ## Команды в терминале
 - `celery -A config worker -l INFO -P eventlet`
