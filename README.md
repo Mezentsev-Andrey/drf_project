@@ -4,8 +4,8 @@
 Заполнение базы данных произведено в админке. Создать суперпользователя кастомной командой 'python manage.py csu'. Заполнить базу данных командой `python manage.py loaddatautf8 all_data.json`. 
 
 ## Команды в терминале
-- 'celery -A config worker -l INFO -P eventlet'
-- 'celery -A config beat -l INFO'
+- `celery -A config worker -l INFO -P eventlet`
+- `celery -A config beat -l INFO`
 
 ## Примечание
 Сервер доступен по адресу: 'http://localhost:8001/'
