@@ -84,9 +84,11 @@
     - GET получение конкретного урока: http://localhost:8000/lesson/detail/<pk урока>/;
     - PUT: обновление урока: http://localhost:8000/lesson/update/<pk урока>;
     - DELETE: удаление урока: http://localhost:8000/lesson/delete/<pk урока>.
-
+    
    **Запросы в Postman для подписки на курс**:
+   
    - POST: создание подписки: `http://localhost:8000/subscription/create;
+     
    - GET: получение списка подписок: `http://localhost:8000/subscriptions/.
     
 **8. Регистрация нового пользователя**: 
