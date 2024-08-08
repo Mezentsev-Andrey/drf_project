@@ -9,7 +9,7 @@ from materials.models import Subscription
 
 @shared_task
 def send_updates(item: typing.Any) -> typing.Any:
-    """Отправляет уведомления обновлениях курсов на почту подписчикам."""
+    """Отправляет уведомления об обновлениях курсов на почту подписчикам."""
     active_subscriptions = Subscription.objects.filter(course=item)
     if active_subscriptions:
         for item in active_subscriptions:
