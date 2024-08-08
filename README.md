@@ -1,63 +1,103 @@
-# Платформа для онлайн-обучения
+# Проект "Платформа для онлайн-обучения"
 
-## Запуск приложения
-Заполнение базы данных произведено в админке. Создать суперпользователя кастомной командой `python manage.py csu`. Заполнить базу данных командой `python manage.py loaddatautf8 all_data.json`. 
+Данный проект представляет собой контейнерную версию Django-приложения “Платформа для онлайн-обучения”.
 
-## Команды в терминале
-- `celery -A config worker -l INFO -P eventlet`
-- `celery -A config beat -l INFO`
+## О проекте
 
-## Примечание
-Сервер доступен по адресу: http://localhost:8001/
+В мире развивается тренд на онлайн-обучение. Но для веб-разработчика важно не только обучиться, но и знать, как реализовать платформу для онлайн-обучения. Поэтому данный проект касается разработки LMS-системы, в которой каждый желающий может размещать свои полезные материалы или курсы.
 
-## 24.1 Вьюсеты и дженерики
-## Запросы в Postman для курса
-- POST: http://localhost:8000/course/ (заполнить тело, выбрав параметры 'raw' и 'json'; поля: name, description)
-- GET: http://localhost:8000/course/<pk курса>/
-- PUT: http://localhost:8000/course/<pk курса>/ (заполнить тело, выбрав параметры 'raw' и 'json')
-- DELETE: http://localhost:8000/course/<pk курса>/
+## Возможности
 
-## Запросы в Postman для урока
-- POST: http://localhost:8000/lesson/create/ (заполнить тело, выбрав параметры 'raw' и 'json', поля: name, description, course)
-- GET (получить список уроков): http://localhost:8000/lesson/list/
-- GET (получить конкретный урок): http://localhost:8000/lesson/view/<pk урока>/
-- PATCH: http://localhost:8000/lesson/update/<pk урока>/
-- DELETE: http://localhost:8000/lesson/delete/<pk урока>/
+- Создание, чтение, обновление и удаление онлайн курса в соответствии с поставленными задачами пользователей;
+- Просмотр списка образовательных курсов и связанных с ними уроками с пагинацией;
+- Возможность выбора пользователя, оплаченного курса и отдельно оплаченного урока;
+- Можно менять порядок сортировки по дате оплаты, фильтровать по курсу или уроку, фильтровать по способу оплаты;
+- Реализован CRUD для пользователей, в том числе регистрация пользователей, авторизация пользователей в проекте реализована с использование JWT-авторизации;
+- Создана группа модераторов с правами работы с любыми уроками и курсами, но без возможности их удалять и создавать новые;
+- Пользователи, которые не входят в группу модераторов, могут видеть, редактировать и удалять только свои курсы и уроки;
+- Для сохранения уроков и курсов реализована дополнительная проверка на отсутствие в материалах ссылок на сторонние ресурсы, кроме youtube.com;
+- Реализована пагинация для вывода всех уроков и курсов;
+- Подключена возможность оплаты курсов через StpipeAPI;
+- Добавлена асинхронная рассылка писем пользователям об обновлении материалов курса
 
-## 24.2 Сериализаторы
-## Запросы в Postman для курса
-- GET: http://localhost:8000/course/
+## Технологии
 
-## Запросы в Postman для пользователя
-- GET (фильтровать по способу оплаты): http://localhost:8000/users/payment/list/?pay_approach=<значение> (в базе данных имеются str значения: 'наличными' и 'картой')
-- GET (фильтровать по курсу): http://localhost:8000/users/payment/list/?payed_course=<значение> (в базе данных имеются int значения: 2 и 3)
+- Python;
+- Django (Django Rest Framework, Celery);
+- PostgreSQL (БД для хранения данных);
+- Docker.
 
-## 25.1 Права доступа в DRF
-## Запросы в Postman
-- POST: http://localhost:8000/users/register/ (заполнить тело, выбрав параметры 'raw' и 'json', поля: email, password)
+## Запуск проекта
 
-## 25.2 Валидаторы, пагинация и тесты
-## Запросы в Postman
-- POST (запрос токена): http://localhost:8000/users/token/ (пример тела: {"email": `admin@sky.pro`, "password": "123qwe567rty"})
-- POST (проверка ссылок на видео): http://localhost:8000/lesson/create/ (пример тела: {"name": "test video", "description": "test video", "course": 2, "url": "https://www.youtube.com/watch?v=FH-TzCVymb0&t=124s"})
-- POST (зарегистрировать оплату подписки): http://localhost:8000/subscriptions/create/ (пример тела: {"is_subscribed": true, "course": 2})
-- GET (вывод всех курсов с пагинацией): http://localhost:8000/course/
-- GET (вывод всех уроков с пагинациец): http://localhost:8000/lesson/list/
+1. Установите зависимости:
+    - `pip install -r requirements.txt`
 
-## 26.1 Документирование и безопасность
-Запросы в браузере
-- http://localhost:8000/swagger/ (документация swagger)
-- http://localhost:8000/redoc/ (документация redoc)
+2. Создайте файл `.env` в корневой директории и заполните необходимые переменные окружения:
+    - POSTGRES_DB=`"имя базы данных"`;
+    - POSTGRES_USER=`"пользователь базы данных"`;
+    - POSTGRES_PASSWORD=`"пароль базы данных"`;
+    - POSTGRES_PORT=`"порт базы данных"`;
+    - POSTGRES_HOST=`"хост базы данных"`.
+   
+   2.1. Настройка электронной почты с которой будут приходить уведомления согласно требуемых настроек:
+    - EMAIL_HOST=`"хост электронной почты"`;
+    - EMAIL_PORT=`"порт электронной почты"`;
+    - EMAIL_HOST_USER=`"пользователь электронной почты"`;
+    - EMAIL_HOST_PASSWORD=`"сгенерированный пароль для SMTP Django"`;
+    
+   2.2. Настройка Celery:
+   - CELERY_BROKER_URL=`"URL брокера Celery"`;
+   - CELERY_RESULT_BACKEND=`"URL бэкенда Celery"`.
 
-## Запросы в Postman
-- POST (получить ссылку на оплату): http://localhost:8000/users/payment/create/ (пример тела: {"sum": 100000, "pay_approach": "карта", "payed_course": 2, "payed_lesson": 1})
+3. Примените миграции:
+    - `python manage.py migrate`
 
-## 26.2. Celery
-Запросы в Postman
-PUT: http://localhost:8000/course/<pk курса>/ (пример тела: {"name": "python", "description": "python разработчик"})
+4. Запустите сервер:
+    - `python manage.py runserver`
 
-## 27.2. Docker Compose
-Команды в терминале:
-- `docker-compose build` (собрать образ);
-- `docker-compose up` (запуск контейнера);
-- `docker-compose exec app <команда>` (выполнение команды внутри контейнера)
+5. Запустите Celery для обработки отложенных задач:
+    - `celery -A config worker -l INFO -P eventlet`
+    - `celery -A config beat -l INFO`
+
+6. Запуск приложения:
+    - Заполнение базы данных произведено в админке. Загруженные данные представлены по адресу: modules/fixtures/all_data.json, modules/fixtures/modules_data.json; users/fixtures/users_data.json. Для их загрузки в базу данных проекта воспользуйтесь командой: `python manage.py loaddatautf8 modules_data.json`
+    - Для выгрузки данных из базы данных проекта используйте команду: `python manage.py dumpdatautf8 modules --output modules/fixtures/modules_data.json` (в данном примере команды приведена выгрузка всех данных из приложения modules.)
+    - Создать суперпользователя кастомной командой `python manage.py csu`.
+
+7. Виды запросов в Postman: 
+
+   Запросы в Postman для образовательного модуля:
+    - POST: http://localhost:8000/modules/ (заполнить тело, выбрав параметры 'raw' и 'json'; поля: name, description);
+    - GET: (получить список модулей): http://localhost:8000/modules/;
+    - GET: (получить конкретный модуль): http://localhost:8000/modules/<pk модуля>/;
+    - PUT: http://localhost:8000/modules/<pk модуля>/ (заполнить тело, выбрав параметры 'raw' и 'json');
+    - DELETE: http://localhost:8000/modules/<pk модуля>/.
+   
+   Запросы в Postman для курса:
+    - POST: http://localhost:8000/course/create/ (заполнить тело, выбрав параметры 'raw' и 'json'; поля: name, description);
+    - GET: (получить список курсов): http://localhost:8000/course/;
+    - GET: (получить конкретный курс): http://localhost:8000/course/retrieve/<pk курса>/;
+    - PUT: http://localhost:8000/course/update/<pk курса> (заполнить тело, выбрав параметры 'raw' и 'json');
+    - DELETE: http://localhost:8000/course/delete/<pk курса>.
+   
+    Запросы в Postman для урока:
+    - POST: `http://localhost:8000/lesson/create/ (заполнить тело, выбрав параметры 'raw' и 'json', поля: name, description, course);
+    - GET (получить список уроков): http://localhost:8000/lesson/;
+    - GET (получить конкретный урок): http://localhost:8000/lesson/retrieve/<pk урока>/;
+    - PATCH: http://localhost:8000/lesson/update/<pk урока>;
+    - DELETE: http://localhost:8000/lesson/delete/<pk урока>.
+8. Регистрация нового пользователя: 
+   - POST: http://localhost:8000/users/user/ (заполнить тело, выбрав параметры 'raw' и 'json', поля: email, password).
+9. После регистрации пользователя нужно войти в приложение с помощью логина и пароля сделав соответствующий запрос:
+   - POST: http://localhost:8000/users/login/
+
+## Документация API
+
+Документация API доступна после запуска сервера по адресам: http://localhost:8000/redoc/ и http://localhost:8000/swagger/
+
+## Запуск проекта с использованием Docker
+  - Используйте файлы Dockerfile и docker-compose.yml. При необходимости внесите в них требуемые изменения;
+  - Соберите образ с помощью команды: `docker-compose build`;
+  - Запустите контейнеры с помощью команды: `docker-compose up`;
+  - Управление контейнерами: Для остановки и удаления контейнеров используйте Ctrl + C в терминале, где запущен docker-compose up. Для остановки контейнеров и удаления созданных ресурсов выполните команду: `docker-compose down`;
+  - Если при запуске контейнера добавить флаг -d, процесс запустится в фоновом режиме (как демон). В случае, если к команде добавить флаг --build, то перед запуском выполнится сборка. В итоге команда будет выглядеть так: `docker-compose up -d --build`.
