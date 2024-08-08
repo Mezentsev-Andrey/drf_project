@@ -87,9 +87,8 @@
     
    **Запросы в Postman для подписки на курс**:
    
-   - POST: создание подписки: `http://localhost:8000/subscription/create;
-     
-   - GET: получение списка подписок: `http://localhost:8000/subscriptions/.
+    - POST: создание подписки: `http://localhost:8000/subscription/create;
+    - GET: получение списка подписок: `http://localhost:8000/subscriptions/.
     
 **8. Регистрация нового пользователя**: 
    - POST: http://localhost:8000/users/user/ (заполнить тело, выбрав параметры 'raw' и 'json', поля: email, password).
