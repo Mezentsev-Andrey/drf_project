@@ -71,29 +71,29 @@
   
    **Запросы в Postman для курса**:
    
-    - POST: создание сетевого курса: http://localhost:8000/courses (заполнить тело, выбрав параметры 'raw' и 'json'; поля: name, description);
-    - GET: получить список курсов: http://localhost:8000/courses/;
-    - GET: получить конкретный курс: http://localhost:8000/courses/<pk курса>/;
-    - PUT: обновление курса http://localhost:8000/courses/<pk курса>/ (заполнить тело, выбрав параметры 'raw' и 'json');
-    - DELETE: удаление курса: http://localhost:8000/courses/<pk курса>/.
+    - `POST: создание сетевого курса: http://localhost:8000/courses (заполнить тело, выбрав параметры 'raw' и 'json'; поля: name, description)`;
+    - `GET: получить список курсов: http://localhost:8000/courses/`;
+    - `GET: получить конкретный курс: http://localhost:8000/courses/<pk курса>/`;
+    - `PUT: обновление курса http://localhost:8000/courses/<pk курса>/ (заполнить тело, выбрав параметры 'raw' и 'json')`;
+    - `DELETE: удаление курса: http://localhost:8000/courses/<pk курса>/`.
     
    **Запросы в Postman для урока**:
    
-    - POST: создание урока: `http://localhost:8000/lesson/create/ (заполнить тело, выбрав параметры 'raw' и 'json', поля: name, description, course);
-    - GET: получение списка уроков: http://localhost:8000/lesson/;
-    - GET получение конкретного урока: http://localhost:8000/lesson/detail/<pk урока>/;
-    - PUT: обновление урока: http://localhost:8000/lesson/update/<pk урока>;
-    - DELETE: удаление урока: http://localhost:8000/lesson/delete/<pk урока>.
+    - `POST: создание урока: `http://localhost:8000/lesson/create/ (заполнить тело, выбрав параметры 'raw' и 'json', поля: name, description)`;
+    - `GET: получение списка уроков: http://localhost:8000/lesson/`;
+    - `GET получение конкретного урока: http://localhost:8000/lesson/detail/<pk урока>/`;
+    - `PUT: обновление урока: http://localhost:8000/lesson/update/<pk урока>`;
+    - `DELETE: удаление урока: http://localhost:8000/lesson/delete/<pk урока>`.
 
    **Запросы в Postman для подписки на курс**:
-   - POST: создание подписки: `http://localhost:8000/subscription/create;
-   - GET: получение списка подписок: `http://localhost:8000/subscriptions/.
+   - `POST: создание подписки: `http://localhost:8000/subscription/create`;
+   - `GET: получение списка подписок: `http://localhost:8000/subscriptions/`.
     
 **8. Регистрация нового пользователя**: 
-   - POST: http://localhost:8000/users/user/ (заполнить тело, выбрав параметры 'raw' и 'json', поля: email, password).
+   - `POST: http://localhost:8000/users/user/ (заполнить тело, выбрав параметры 'raw' и 'json', поля: email, password)`.
     
 **9. После регистрации пользователя нужно войти в приложение с помощью логина и пароля сделав соответствующий запрос**:
-   - POST: http://localhost:8000/users/login/
+   - `POST: http://localhost:8000/users/login/`
 
 ## Документация API
 
