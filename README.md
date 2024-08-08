@@ -43,8 +43,8 @@
     - EMAIL_HOST=`"хост электронной почты"`;
     - EMAIL_PORT=`"порт электронной почты"`;
     - EMAIL_HOST_USER=`"пользователь электронной почты"`;
-    - EMAIL_HOST_PASSWORD=`"сгенерированный пароль для SMTP Django"`;
-    
+    - EMAIL_HOST_PASSWORD=`"сгенерированный пароль для SMTP Django"`.
+        
    **2.2. Настройка Celery**:
    - CELERY_BROKER_URL=`"URL брокера Celery"`;
    - CELERY_RESULT_BACKEND=`"URL бэкенда Celery"`.
@@ -61,11 +61,9 @@
 
 **6. Запуск приложения**:
 
-    - Заполнение базы данных произведено в админке. Загруженные данные представлены по адресу: materials/fixtures/all_data.json, materials/fixtures/materials_data.json; users/fixtures/users_data.json. Для их загрузки в базу данных проекта воспользуйтесь командой: `python manage.py loaddatautf8 materials_data.json`;
-    
-    - Для выгрузки данных из базы данных проекта используйте команду: `python manage.py dumpdatautf8 materials --output materials/fixtures/materials_data.json` (в данном примере команды приведена выгрузка всех данных из приложения materials.);
-    
-    - Создать суперпользователя кастомной командой `python manage.py csu`.
+- Заполнение базы данных произведено в админке. Загруженные данные представлены по адресу: materials/fixtures/all_data.json, materials/fixtures/materials_data.json; users/fixtures/users_data.json. Для их загрузки в базу данных проекта воспользуйтесь командой: `python manage.py loaddatautf8 materials_data.json`;
+- Для выгрузки данных из базы данных проекта используйте команду: `python manage.py dumpdatautf8 materials --output materials/fixtures/materials_data.json` (в данном примере команды приведена выгрузка всех данных из приложения materials.);
+- Создать суперпользователя кастомной командой `python manage.py csu`.
 
 **7. Виды запросов в Postman**: 
   
@@ -77,7 +75,6 @@
     - PUT: обновление курса http://localhost:8000/courses/<pk курса>/ (заполнить тело, выбрав параметры 'raw' и 'json');
     - DELETE: удаление курса: http://localhost:8000/courses/<pk курса>/.
     
-   
    **Запросы в Postman для урока**:
    
     - POST: создание урока: `http://localhost:8000/lesson/create/ (заполнить тело, выбрав параметры 'raw' и 'json', поля: name, description, course);
